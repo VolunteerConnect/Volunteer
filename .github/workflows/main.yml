@@ -1,4 +1,4 @@
-name: Deploy ASP.NET Core App to Docker Hub
+name: Push ASP.NET Core Image to Docker Hub
 
 on:
     push:
@@ -6,7 +6,7 @@ on:
             - main
 
 jobs:
-    build-and-deploy:
+    push:
         runs-on: ubuntu-latest
 
         steps:
