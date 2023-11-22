@@ -36,7 +36,12 @@ namespace VolunteerUnitTests.Organizations
 
         public Organization GetOrganization(int Id)
         {
-            return _organizations.FirstOrDefault(o => o.Id == Id);
+            var organizations = _organizations.FirstOrDefault(o => o.Id == Id);
+            if (organizations == null)
+            {
+                throw new Exception("Organization not found");
+            }
+            return organizations;
         }
     }
 }
