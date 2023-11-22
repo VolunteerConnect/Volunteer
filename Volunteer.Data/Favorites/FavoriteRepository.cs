@@ -23,7 +23,7 @@ namespace Volunteer.Data.Favorites
 
         public IEnumerable<Favorite> GetFavorites(string UserId)
         {
-            List<Favorite> favorites = _context.Favorites.Where(f => f.UserId == UserId).ToList();
+            var favorites = _context.Favorites.Where(f => f.UserId == UserId).ToList();
             if (favorites.Count == 0)
             {
                 throw new Exception("Favorites not found");
@@ -33,6 +33,13 @@ namespace Volunteer.Data.Favorites
 
         public Favorite AddFavorite(Favorite favorite)
         {
+        var existingFavorite = _context.Favorites.FirstOrDefault(f => f.UserId == favorite.UserId && f.FavoriteOrganizationId == favorite.FavoriteOrganizationId);
+
+        if (existingFavorite != null)
+        {
+            throw new Exception("Favorite already exists");
+        }
+
             _context.Favorites.Add(favorite);
             _context.SaveChanges();
             return favorite;
@@ -42,7 +49,7 @@ namespace Volunteer.Data.Favorites
         {
             if (favorite == null)
             {
-                throw new ArgumentNullException(nameof(favorite));
+                throw new Exception("Favorite not found");
             }
 
             _context.Favorites.Remove(favorite);
