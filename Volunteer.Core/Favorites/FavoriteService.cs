@@ -22,21 +22,16 @@ namespace Volunteer.Core.Favorites
             }            
         }
 
-        public Favorite SetFavorite(string UserId, int OrganizationId)
+        public Favorite AddFavorite(Favorite favorite)
         {
             try
             {
-                Favorite favorite = new Favorite
-                {
-                    UserId = UserId,
-                    FavoriteOrganizationId = OrganizationId
-                };
-                favorite = _favoriteRepository.SetFavorite(favorite);
-                return favorite;
+                Favorite newFavorite = _favoriteRepository.AddFavorite(favorite);
+                return newFavorite;
             }
             catch (Exception e)
             {
-                throw new ArgumentException($"Favorite creation failed: {e.Message}");
+                throw new ArgumentException($"Favorite addition failed: {e.Message}");
             }
         }
 
@@ -44,7 +39,8 @@ namespace Volunteer.Core.Favorites
         {
             try
             {
-                Favorite favorite = _favoriteRepository.RemoveFavorite(Id);
+                Favorite favorite = _favoriteRepository.GetFavorite(Id);
+                favorite = _favoriteRepository.RemoveFavorite(favorite);
                 return favorite;
             }
             catch (Exception e)

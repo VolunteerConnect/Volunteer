@@ -18,7 +18,12 @@ namespace Volunteer.Data.Organizations
 
         public Organization GetOrganization(int id)
         {
-            return _context.Organizations.Find(id);
+            var organization = _context.Organizations.Find(id);
+            if (organization == null)
+            {
+                throw new Exception("Organization not found");
+            }
+            return organization;
         }
     }
 }

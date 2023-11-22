@@ -17,7 +17,7 @@ namespace volunteer.Controllers
             _organizationService = new OrganizationService(new OrganizationRepository(_connectionString));
         }
 
-        [HttpGet("organizations", Name = "GetAllOrganizations")]
+        [HttpGet("organizations")]
         public IActionResult GetOrganizations()
         {
             try
@@ -31,7 +31,7 @@ namespace volunteer.Controllers
             }
         }
 
-        [HttpGet("organization/{id}", Name = "GetOrganizationById")]
+        [HttpGet("organization/{id}")]
         public IActionResult GetOrganization(int id)
         {
             try
@@ -41,7 +41,7 @@ namespace volunteer.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(500, $"Internal server error: {e.Message}");
+                return StatusCode(404, e.Message);
             }
         }
     }

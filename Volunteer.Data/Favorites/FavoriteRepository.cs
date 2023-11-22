@@ -11,24 +11,43 @@ namespace Volunteer.Data.Favorites
             _context = new VolunteerDBContext(connectionString);
         }
 
-        public IEnumerable<Favorite> GetFavorites(string UserId)
+        public Favorite GetFavorite(int Id)
         {
-            return _context.Favorites.Where(f => f.UserId == UserId).ToList();
+            var favorite = _context.Favorites.Find(Id);
+            if (favorite == null)
+            {
+                throw new Exception("Favorite not found");
+            }
+            return favorite;
         }
 
-        public Favorite SetFavorite(Favorite favorite)
+        public IEnumerable<Favorite> GetFavorites(string UserId)
+        {
+            List<Favorite> favorites = _context.Favorites.Where(f => f.UserId == UserId).ToList();
+            if (favorites.Count == 0)
+            {
+                throw new Exception("Favorites not found");
+            }
+            return favorites;
+        }
+
+        public Favorite AddFavorite(Favorite favorite)
         {
             _context.Favorites.Add(favorite);
             _context.SaveChanges();
             return favorite;
         }  
         
-        public Favorite RemoveFavorite(int Id)
+        public Favorite RemoveFavorite(Favorite favorite)
         {
-            Favorite favoriteToRemove = _context.Favorites.Find(Id);
-            _context.Favorites.Remove(favoriteToRemove);
+            if (favorite == null)
+            {
+                throw new ArgumentNullException(nameof(favorite));
+            }
+
+            _context.Favorites.Remove(favorite);
             _context.SaveChanges();
-            return favoriteToRemove;
+            return favorite;
         }
     }
 }

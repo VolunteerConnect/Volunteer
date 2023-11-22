@@ -6,10 +6,10 @@ namespace Volunteer.Data
 {
     public class VolunteerDBContext : DbContext
     {
-        private readonly string _connectionString;
+        private readonly string? _connectionString;
         public VolunteerDBContext(string connectionString)
         {
-            _connectionString = connectionString;
+            _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         }
 
         public VolunteerDBContext(DbContextOptions<VolunteerDBContext> options) : base(options)

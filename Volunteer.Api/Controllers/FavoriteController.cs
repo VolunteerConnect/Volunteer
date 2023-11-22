@@ -17,7 +17,7 @@ namespace volunteer.Controllers
             _favoriteService = new FavoriteService(new FavoriteRepository(_connectionString));
         }
 
-        [HttpGet("favorites/{UserId}", Name = "GetFavoritesByUserId")]
+        [HttpGet("favorites/{UserId}")]
         public IActionResult GetFavorites(string UserId)
         {
             try
@@ -31,13 +31,13 @@ namespace volunteer.Controllers
             }
         }
 
-        [HttpPost("favorite/{UserId}/{OrganizationId}", Name = "SetFavorite")]
-        public IActionResult SetFavorite(string UserId, int OrganizationId)
+        [HttpPost("favorite")]
+        public IActionResult AddFavorite(Favorite favorite)
         {
             try
             {
-                Favorite favorite = _favoriteService.SetFavorite(UserId, OrganizationId);
-                return Ok(favorite);
+                Favorite newFavorite = _favoriteService.AddFavorite(favorite);
+                return Ok(newFavorite);
             }
             catch (Exception e)
             {
@@ -45,7 +45,7 @@ namespace volunteer.Controllers
             }
         }
 
-        [HttpDelete("favorite/{Id}", Name = "RemoveFavorite")]
+        [HttpDelete("favorite/{Id}")]
         public IActionResult RemoveFavorite(int Id)
         {
             try

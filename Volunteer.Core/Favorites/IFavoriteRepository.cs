@@ -2,8 +2,9 @@ namespace Volunteer.Core.Favorites
 {
     public interface IFavoriteRepository
     {
+        Favorite GetFavorite(int Id);
         IEnumerable<Favorite> GetFavorites(string UserId);
-        Favorite SetFavorite(Favorite favorite);
-        Favorite RemoveFavorite(int Id);
+        Favorite AddFavorite(Favorite favorite);
+        Favorite RemoveFavorite(Favorite favorite);
     }
 }
