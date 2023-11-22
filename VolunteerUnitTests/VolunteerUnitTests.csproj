@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+    <ItemGroup>
+    <ProjectReference Include="..\Volunteer.Core\Volunteer.Core.csproj" />
+  </ItemGroup>
+
 </Project>
