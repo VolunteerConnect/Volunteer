@@ -1,14 +1,15 @@
 using Microsoft.EntityFrameworkCore;
+using Volunteer.Core.Favorites;
 using Volunteer.Core.Organizations;
 
 namespace Volunteer.Data
 {
     public class VolunteerDBContext : DbContext
     {
-        private readonly string _connectionString;
+        private readonly string? _connectionString;
         public VolunteerDBContext(string connectionString)
         {
-            _connectionString = connectionString;
+            _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         }
 
         public VolunteerDBContext(DbContextOptions<VolunteerDBContext> options) : base(options)
@@ -16,6 +17,7 @@ namespace Volunteer.Data
         }
 
         public DbSet<Organization> Organizations { get; set; }
+        public DbSet<Favorite> Favorites { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseMySql(_connectionString, ServerVersion.Parse("8.2.0"));
@@ -25,6 +27,10 @@ namespace Volunteer.Data
             modelBuilder.Entity<Organization>().ToTable("organizations");
             modelBuilder.Entity<Organization>().Property(o => o.BannerImage).HasColumnName("banner_image");
             modelBuilder.Entity<Organization>().Property(o => o.DescriptionLong).HasColumnName("description_long");
+
+            modelBuilder.Entity<Favorite>().ToTable("favorites");
+            modelBuilder.Entity<Favorite>().Property(o => o.UserId).HasColumnName("user_id");
+            modelBuilder.Entity<Favorite>().Property(o => o.FavoriteOrganizationId).HasColumnName("favorite_organization_id");
         }
     }
 }
