@@ -1,13 +1,16 @@
-# Project Name
+# Volunteer Backend
 
 ## Introduction
 
-This project is a web application built with .NET Core and Entity Framework Core.
+This repository houses the backend for Volunteer Connect, a web application crafted using .NET Core and Entity Framework Core. Primarily serving as the backend, it furnishes a RESTful API, extensively documented using Swagger, enabling seamless communication with the frontend.
 
 ## Technologies Used
 
 -   .NET Core: A cross-platform framework for building modern cloud-based web applications.
 -   Entity Framework Core: A lightweight, extensible, open source and cross-platform version of the popular Entity Framework data access technology.
+-   Testing Frameworks: xUnit and Moq.
+-   Swagger: An open-source software framework backed by a large ecosystem of tools that helps developers design, build, document, and consume RESTful web services.
+-   Docker: A set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
 
 ## Getting Started
 
@@ -16,11 +19,12 @@ This project is a web application built with .NET Core and Entity Framework Core
     Use the following command to clone this repository to your local machine.
 
     ```bash
-    git clone https://github.com/VolunteerConnect/VolunteerBackend
+    git clone https://github.com/VolunteerConnect/VolunteerBackend.git
     ```
 
 2. **Set up the database**
-   Update the `DefaultConnection` string in the `appsettings.json` file with your database connection string.
+
+    Update the `DefaultConnection` string in the `appsettings.json` file with your SQL Server connection details.
 
     ```json
     "ConnectionStrings": {
@@ -34,3 +38,5 @@ This project is a web application built with .NET Core and Entity Framework Core
     ```bash
     dotnet run
     ```
+
+    The application will start running at `https://localhost:7177`.
