@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Volunteer.Core.Favorites;
+using Volunteer.Core.Organizations;
 using Volunteer.Data.Favorites;
 
 namespace volunteer.Controllers
@@ -24,6 +25,20 @@ namespace volunteer.Controllers
             {
                 IEnumerable<Favorite> favorites = _favoriteService.GetFavorites(UserId);
                 return Ok(favorites);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, $"Internal server error: {e.Message}");
+            }
+        }
+
+        [HttpGet("favorites/{UserId}/organisations")]
+        public IActionResult GetFavoriteOrganizations(string UserId)
+        {
+            try
+            {
+                IEnumerable<Organization> favoriteOrganizations = _favoriteService.GetOrganizations(UserId);
+                return Ok(favoriteOrganizations);
             }
             catch (Exception e)
             {
