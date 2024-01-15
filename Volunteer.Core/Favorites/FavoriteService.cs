@@ -1,3 +1,5 @@
+using Volunteer.Core.Organizations;
+
 namespace Volunteer.Core.Favorites
 {
     public class FavoriteService
@@ -19,7 +21,20 @@ namespace Volunteer.Core.Favorites
             catch (Exception e)
             {
                 throw new ArgumentException($"Favorite retrieval failed: {e.Message}");
-            }            
+            }
+        }
+
+        public IEnumerable<Organization> GetOrganizations(string UserId)
+        {
+            try
+            {
+                IEnumerable<Organization> organizations = _favoriteRepository.GetFavoriteOrganizations(UserId);
+                return organizations;
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException($"Favorite retrieval failed: {e.Message}");
+            }
         }
 
         public Favorite AddFavorite(Favorite favorite)

@@ -1,4 +1,5 @@
 using Volunteer.Core.Favorites;
+using Volunteer.Core.Organizations;
 
 namespace Volunteer.Data.Favorites
 {
@@ -30,21 +31,34 @@ namespace Volunteer.Data.Favorites
             }
             return favorites;
         }
+        public IEnumerable<Organization> GetFavoriteOrganizations(string UserId)
+        {
+            List<Favorite> favorites = _context.Favorites.Where(f => f.UserId == UserId).ToList();
+            List<Organization> favoriteOrganizations = new List<Organization>();
+
+            foreach (Favorite favorite in favorites)
+            {
+                Organization favoriteOrganisation = _context.Organizations.Where(organization => organization.Id == favorite.FavoriteOrganizationId).Single();
+                favoriteOrganizations.Add(favoriteOrganisation);
+            }
+
+            return favoriteOrganizations;
+        }
 
         public Favorite AddFavorite(Favorite favorite)
         {
-        var existingFavorite = _context.Favorites.FirstOrDefault(f => f.UserId == favorite.UserId && f.FavoriteOrganizationId == favorite.FavoriteOrganizationId);
+            var existingFavorite = _context.Favorites.FirstOrDefault(f => f.UserId == favorite.UserId && f.FavoriteOrganizationId == favorite.FavoriteOrganizationId);
 
-        if (existingFavorite != null)
-        {
-            throw new Exception("Favorite already exists");
-        }
+            if (existingFavorite != null)
+            {
+                throw new Exception("Favorite already exists");
+            }
 
             _context.Favorites.Add(favorite);
             _context.SaveChanges();
             return favorite;
-        }  
-        
+        }
+
         public Favorite RemoveFavorite(Favorite favorite)
         {
             if (favorite == null)

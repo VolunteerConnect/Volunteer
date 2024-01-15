@@ -1,4 +1,5 @@
 using Volunteer.Core.Favorites;
+using Volunteer.Core.Organizations;
 
 namespace VolunteerUnitTests.Favorites
 {
@@ -53,7 +54,7 @@ namespace VolunteerUnitTests.Favorites
             {
                 throw new Exception("Favorite already exists");
             }
-            
+
             _favorites.Add(favorite);
             return favorite;
         }
@@ -66,6 +67,11 @@ namespace VolunteerUnitTests.Favorites
             }
             _favorites.Remove(favorite);
             return favorite;
+        }
+
+        public IEnumerable<Organization> GetFavoriteOrganizations(string UserId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
