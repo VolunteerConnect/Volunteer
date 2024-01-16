@@ -48,7 +48,7 @@ jobs:
               shell: powershell
               run: |
                   .\.sonar\scanner\dotnet-sonarscanner begin /k:"VolunteerConnect_VolunteerBackend" /o:"volunteerconnect" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-                  dotnet build ./volunteer.api/volunteer.api.csproj --configuration Release
+                  dotnet build ./volunteerbackend/volunteer.api/volunteer.api.csproj --configuration Release
                   .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
 
             - name: Run unit tests
