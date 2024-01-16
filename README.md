@@ -6,7 +6,7 @@ This is a volunteer app that allows users to create an account and sign up for v
 To find out more about the project, please visit the documentation of the frontend and backend repositories.
 
 -   [Frontend](https://github.com/VolunteerConnect/VolunteerFrontend/blob/main/README.md)
--   [Backend](https://github.com/VolunteerConnect/Volunteer)
+-   [Backend](https://github.com/VolunteerConnect/Volunteer/blob/main/VolunteerBackend/README.md)
 
 ## Getting Started
 
