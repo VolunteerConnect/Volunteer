@@ -1,42 +1,75 @@
-# Volunteer Backend
+# Volunteer
 
-## Introduction
+## Description
 
-This repository houses the backend for Volunteer Connect, a web application crafted using .NET Core and Entity Framework Core. Primarily serving as the backend, it furnishes a RESTful API, extensively documented using Swagger, enabling seamless communication with the frontend.
+This is a volunteer app that allows users to create an account and sign up for volunteer opportunities.
+To find out more about the project, please visit the documentation of the frontend and backend repositories.
 
-## Technologies Used
-
--   .NET Core: A cross-platform framework for building modern cloud-based web applications.
--   Entity Framework Core: A lightweight, extensible, open source and cross-platform version of the popular Entity Framework data access technology.
--   Testing Frameworks: xUnit and Moq.
--   Swagger: An open-source software framework backed by a large ecosystem of tools that helps developers design, build, document, and consume RESTful web services.
--   Docker: A set of platform as a service products that use OS-level virtualization to deliver software in packages called containers.
+-   [Frontend](https://github.com/VolunteerConnect/VolunteerFrontend/blob/main/README.md)
+-   [Backend](https://github.com/VolunteerConnect/Volunteer)
 
 ## Getting Started
 
-1. **Clone the repository**
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+First, clone the repository to your local machine:
 
-    Use the following command to clone this repository to your local machine.
+```bash
+git clone https://github.com/VolunteerConnect/Volunteer
+cd Volunteer
+git clone https://github.com/VolunteerConnect/VolunteerFrontend
+```
 
-    ```bash
-    git clone https://github.com/VolunteerConnect/VolunteerBackend.git
-    ```
+Copy the ./volunteerfrontend/.env.local.example file to ./volunteerfrontend/.env.local using the following command:
 
-2. **Set up the database**
+```bash
+cp ./volunteerfrontend/.env.local.example ./volunteerfrontend/.env.local
+```
 
-    Update the `DefaultConnection` string in the `appsettings.json` file with your SQL Server connection details.
+Fill in the following variables in ./volunteerfrontend/.env.local:
 
-    ```json
-    "ConnectionStrings": {
-        "DefaultConnection": "Server=your_server;Database=your_database;User Id=your_user;Password=your_password;"
-    }
-    ```
+```plaintext
+AUTH0_SECRET=
+AUTH0_BASE_URL='http://localhost:3000/'
+AUTH0_ISSUER_BASE_URL=
+AUTH0_CLIENT_ID=
+AUTH0_CLIENT_SECRET=
+NEXT_PUBLIC_API_BASE_URL=http://localhost:80/api
+```
 
-3. **Run the application**
-   Navigate to the project directory and run the following command to start the application.
+If needed, change the ./voluteerbackend/volunteer.api/appsettings.json file.
 
-    ```bash
-    dotnet run
-    ```
+To start the application for development, run the following command:
 
-    The application will start running at `https://localhost:7177`.
+```bash
+    docker-compose up -d
+```
+
+To start the application for production, run the following command:
+
+```bash
+    docker-compose -f docker-compose.prod.yml up -d
+```
+
+To stop the application, run the following command:
+
+```bash
+    docker-compose down
+```
+
+## Definition of Done
+
+-   Code follows coding standards and best practices.
+-   All code related to the user story or feature is written and reviewed.
+-   Code has been reviewed by at least one other team member for quality, correctness, and adherence to coding standards.
+-   Any identified issues or improvements have been addressed.
+-   The user story or feature has undergone user acceptance testing by stakeholders or users.
+-   There are no known defects or critical issues related to the user story or feature.
+-   The code is ready for deployment to the production environment.
+
+## User Story
+
+**As a potential volunteer, I want to see an overview of non-profit organizations so that I can choose which organization I want to assist.**
+
+**Acceptance Criteria**
+
+-   I should see a list of 5 non-profit organizations with their names, brief descriptions and a picture or logo.

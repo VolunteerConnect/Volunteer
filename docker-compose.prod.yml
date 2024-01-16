@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+    frontend:
+        container_name: frontend
+        image: jraemakers/volunteer-frontend:main
+        ports:
+            - '3000:3000'
+        depends_on:
+            - backend
+
+    backend:
+        container_name: backend
+        image: jraemakers/volunteer-backend:main
+        ports:
+            - '80:80'
+        depends_on:
+            - mysql
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=mysql;Port=3306;Database=volunteer;User ID=root;Password=password123;
+
+    mysql:
+        image: mysql:latest
+        container_name: mysql_db
+        environment:
+            MYSQL_ROOT_PASSWORD: password123
+            MYSQL_DATABASE: volunteer
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: password123
+        ports:
+            - '3306:3306'
+        volumes:
+            - ./volunteer.sql:/docker-entrypoint-initdb.d/init.sql
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: phpmyadmin
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+            MYSQL_ROOT_PASSWORD: password123
+        ports:
+            - '8080:80'
+        depends_on:
+            - mysql
