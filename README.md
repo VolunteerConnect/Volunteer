@@ -5,8 +5,8 @@
 This is a volunteer app that allows users to create an account and sign up for volunteer opportunities.
 To find out more about the project, please visit the documentation of the frontend and backend repositories.
 
--   [Frontend](https://github.com/VolunteerConnect/VolunteerFrontend)
--   [Backend](https://github.com/VolunteerConnect/VolunteerBackend)
+-   [Frontend](https://github.com/VolunteerConnect/VolunteerFrontend/blob/main/README.md)
+-   [Backend](https://github.com/VolunteerConnect/Volunteer)
 
 ## Getting Started
 
@@ -14,8 +14,8 @@ Follow these instructions to get a copy of the project up and running on your lo
 First, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/VolunteerConnect/VolunteerBackend
-cd VolunteerBackend
+git clone https://github.com/VolunteerConnect/Volunteer
+cd Volunteer
 git clone https://github.com/VolunteerConnect/VolunteerFrontend
 ```
 
